@@ -1,17 +1,18 @@
 @echo off
 rem shutdown_timer.bat
-rem 指定した分後にPCをシャットダウンします
+rem Usage: shutdown_timer.bat 30
+rem → 30分後にシャットダウン
 
 setlocal
 
-set /p minutes=シャットダウンまでの分数を入力してください: 
-
-if "%minutes%"=="" (
-  echo 入力がありません。中止します。
+if "%~1"=="" (
+  echo 分数を指定してください。
+  echo 例: shutdown_timer.bat 30
   pause
   exit /b
 )
 
-set /a total_seconds=%minutes% * 60
+set minutes=%~1
+set /a total_seconds=minutes * 60
 
 shutdown /s /t %total_seconds%
